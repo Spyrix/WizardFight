@@ -11,6 +11,7 @@ TagManager:
   - DisintegrateSpellObject
   - Interactable
   - AimingUI
+  - MenuOption
   layers:
   - Default
   - TransparentFX

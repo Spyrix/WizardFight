@@ -712,6 +712,225 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MenuControls"",
+            ""id"": ""583bccd6-a33e-4a4e-bf12-bf32f30e303d"",
+            ""actions"": [
+                {
+                    ""name"": ""Navigate"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""fb7f51ef-a4bd-4f26-a226-657c22d527fb"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""e2cb2fe4-2cbf-4ea2-a3fd-99d838a1744e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""97748486-fdc2-4f90-9760-75a24b9aef0e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""08c1856b-a538-4325-ad24-66a77eca9060"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd75d8a6-7c66-4530-8527-a9e29344c193"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""GamePad - LeftStick"",
+                    ""id"": ""84c9dc76-a9c4-4b99-ab73-2e80cdfae1bc"",
+                    ""path"": ""2DVector(mode=2)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""b24cb4af-806a-4f5b-b07b-dd628656a000"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""f2b48a29-15b2-450e-810f-c3810ba0a903"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""40d8fc09-23c5-4a5b-98e3-8d921d71b620"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""af021741-1e6b-44be-99d4-610ddaf26acb"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""GamePad - DPad"",
+                    ""id"": ""491ad734-e9a3-4348-b34b-b2eebff350d9"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c4c6666f-f3c8-46b7-9f2c-d5414994e426"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""95f3d054-d7f6-4a95-8dad-40f72e145042"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""9945ed5e-2f28-4df9-8e04-c15c55a3ac14"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""1458742d-4e08-4fed-bf0a-bc1c3c7e7cbd"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""GamePad - RightStick"",
+                    ""id"": ""be9e7888-a85a-438b-914a-5657afe71332"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""3ddc19aa-559a-480d-b9e5-750198615f6d"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""d7c0650c-5576-4ec5-bbde-e21175e07315"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""fd4ba814-e2c5-4d90-947c-1312aea83bf2"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""c9e67bda-e875-4c9a-b2c4-476bb5483a0e"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -799,6 +1018,11 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_PlayerControls_Spell2 = m_PlayerControls.FindAction("Spell2", throwIfNotFound: true);
         m_PlayerControls_Jump = m_PlayerControls.FindAction("Jump", throwIfNotFound: true);
         m_PlayerControls_Cancel = m_PlayerControls.FindAction("Cancel", throwIfNotFound: true);
+        // MenuControls
+        m_MenuControls = asset.FindActionMap("MenuControls", throwIfNotFound: true);
+        m_MenuControls_Navigate = m_MenuControls.FindAction("Navigate", throwIfNotFound: true);
+        m_MenuControls_Select = m_MenuControls.FindAction("Select", throwIfNotFound: true);
+        m_MenuControls_Cancel = m_MenuControls.FindAction("Cancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1038,6 +1262,55 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         }
     }
     public PlayerControlsActions @PlayerControls => new PlayerControlsActions(this);
+
+    // MenuControls
+    private readonly InputActionMap m_MenuControls;
+    private IMenuControlsActions m_MenuControlsActionsCallbackInterface;
+    private readonly InputAction m_MenuControls_Navigate;
+    private readonly InputAction m_MenuControls_Select;
+    private readonly InputAction m_MenuControls_Cancel;
+    public struct MenuControlsActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public MenuControlsActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Navigate => m_Wrapper.m_MenuControls_Navigate;
+        public InputAction @Select => m_Wrapper.m_MenuControls_Select;
+        public InputAction @Cancel => m_Wrapper.m_MenuControls_Cancel;
+        public InputActionMap Get() { return m_Wrapper.m_MenuControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuControlsActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuControlsActions instance)
+        {
+            if (m_Wrapper.m_MenuControlsActionsCallbackInterface != null)
+            {
+                @Navigate.started -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnNavigate;
+                @Navigate.performed -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnNavigate;
+                @Navigate.canceled -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnNavigate;
+                @Select.started -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnSelect;
+                @Cancel.started -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnCancel;
+            }
+            m_Wrapper.m_MenuControlsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Navigate.started += instance.OnNavigate;
+                @Navigate.performed += instance.OnNavigate;
+                @Navigate.canceled += instance.OnNavigate;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
+                @Cancel.started += instance.OnCancel;
+                @Cancel.performed += instance.OnCancel;
+                @Cancel.canceled += instance.OnCancel;
+            }
+        }
+    }
+    public MenuControlsActions @MenuControls => new MenuControlsActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1105,6 +1378,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnSpell1(InputAction.CallbackContext context);
         void OnSpell2(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
+    }
+    public interface IMenuControlsActions
+    {
+        void OnNavigate(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
     }
 }

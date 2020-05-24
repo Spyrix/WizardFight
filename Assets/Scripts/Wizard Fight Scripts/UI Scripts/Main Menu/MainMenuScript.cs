@@ -1,120 +1,58 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
+using UnityEngine.EventSystems;
 
 public class MainMenuScript : MonoBehaviour
 {
-    IMenuState currentState;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    internal GameObject StartMenuCanvas;
+    [SerializeField]
+    internal GameObject ModeSelectMenuCanvas;
+    [SerializeField]
+    internal GameObject RegularBattleButton;
+    [SerializeField]
+    internal GameObject PlaySandboxButton;
+
+
+    public void ButtonStartSandbox()
     {
-        currentState = new StartMenu();
+        SceneManager.LoadScene("SandboxScene");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ButtonQuit()
     {
-        
-    }
-}
-
-/*
- * Menu state Machine:
- * 
- * */
-interface IMenuState
-{
-    void HandleInput();
-    void Update();
-}
-
-public class StartMenu : IMenuState
-{
-    /*
-     * Menu that goes into selecting a playmode
-     * */
-    public StartMenu()
-    {
-
+        Application.Quit();
     }
 
-    public void HandleInput()
+    public void ButtonStartGame()
     {
-
+        //Takes us to the mode select Menu
+        StartMenuCanvas.SetActive(false);
+        ModeSelectMenuCanvas.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(RegularBattleButton);
     }
 
-    public void Update()
+    public void ButtonRegularBattle()
     {
-
-    }
-}
-
-public class PlayModeMenu : IMenuState
-{
-    /*
-     * Selecting a playmode. 
-     * Right now, only RegularPick is implemented
-     * Eventually there will be more
-     * */
-    public PlayModeMenu()
-    {
-
+        //So we need to do a couple of things
+        //First we need to determine how many players are currently playing, and create entites for each player that allow them to select spells
+        //Then, we need to enable the spell selection canvas
+        //Then, 
     }
 
-    public void HandleInput()
+    public void ButtonStageSelection()
     {
-
+        //Takes us to the stage select screen
     }
 
-    public void Update()
+    public void ReturnToStartButton()
     {
-
-    }
-}
-
-public class RegularPickBattleMenu : IMenuState
-{
-    /*
-     * This mode will either go into the stageselectmenu state, or switch back to the playmodemenu.
-     * Regular Pick works as such:
-     * Players select three spells that they want to prepare to take into battle with them.
-     * No one player may select the same spell twice, but mutliple players may select the same spell.
-     * After all players have selected three spells, any one player may press start to move into the battle arena selection screen.
-     * */
-    public RegularPickBattleMenu()
-    {
-
+        StartMenuCanvas.SetActive(true);
+        ModeSelectMenuCanvas.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(PlaySandboxButton);
     }
 
-    public void HandleInput()
-    {
-
-    }
-
-    public void Update()
-    {
-
-    }
-}
-
-public class StageSelectionMenu : IMenuState
-{
-    /*
-     * This state will either revert back to whatever previous state it was in, or switch into the scene containing the stage selected.
-     * 
-     * */
-    public StageSelectionMenu()
-    {
-
-    }
-
-    public void HandleInput()
-    {
-
-    }
-
-    public void Update()
-    {
-
-    }
 }

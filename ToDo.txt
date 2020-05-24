@@ -1,0 +1,15 @@
+Features to Implement:
+Pausing
+Spell Select Menu
+Arena Select Menu
+Enable spells to be insta-cast, for future implementation
+Game Sounds
+Game Music
+
+
+Bugs to fix:
+Comment all files
+Unplugging a controller midgame will likely cause a crash
+players can collide with objects and climb them? Rigidbody BS
+Get rid of all warnings in console
+try to remove gameobject.find and just use references
