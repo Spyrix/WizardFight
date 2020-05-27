@@ -19,20 +19,14 @@ public class PlayerSpellcasting : MonoBehaviour
     internal PlayerScript playerScript;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         spellSlotCooldownTimers = new float[3];
         spellSlots = new List<GameObject>();
         abilityCooldownControllers = new List<GameObject>();
         abilityAimGameObjects = new GameObject[3];
         playerScript = GetComponent<PlayerScript>();
-        //DEBUG PURPOSES
-        //SET SPELLNUM 0 to SPELLSLOT 0
-        //This needs to be changed, so that it can be dynamically set
-        spellSlots.Add(Resources.Load<GameObject>("Prefabs/DisintegrateSpellObjectBase"));
-        spellSlots.Add(Resources.Load<GameObject>("Prefabs/IceSpellPrefab"));
-        spellSlots.Add(Resources.Load<GameObject>("Prefabs/BlinkSpellPrefab"));
-        //spellSlots.Add(Resources.Load<GameObject>("Prefabs/ElectricSpellPrefab"));
+
         //create the UI element for each spellslot
         for (int i = 0; i < spellSlots.Count; i++)
         {
@@ -139,6 +133,46 @@ public class PlayerSpellcasting : MonoBehaviour
     {
         return spellSlotCooldownTimers;
     }
+
+    public void AddSpellToSlot(GameObject g)
+    {
+        //add the prefab to the spellslot
+        spellSlots.Add(g);
+        int i = spellSlots.Count - 1;
+        //handle the UI elements
+        //Instantiate graphic and attach it to the player status bar, above each player's head
+        GameObject bar = transform.Find("PlayerStatusBar").gameObject;
+        GameObject ac = Instantiate(Resources.Load<GameObject>("Prefabs/AbilityCooldownPrefab"), bar.transform);
+        ac.transform.SetParent(bar.transform);
+
+        //Giving the ability cooldown graphic different text//features depending on their spell slot/button
+        switch (i)
+        {
+            case 0:
+                ac.transform.Find("Text").gameObject.GetComponent<Text>().text = "X";
+                break;
+            case 1:
+                ac.transform.Find("Text").gameObject.GetComponent<Text>().text = "Y";
+                break;
+            case 2:
+                ac.transform.Find("Text").gameObject.GetComponent<Text>().text = "B";
+                break;
+            default:
+                ac.transform.Find("Text").gameObject.GetComponent<Text>().text = "e";
+                break;
+        }
+
+        //Set scale and position of graphic
+        RectTransform rt = ac.GetComponent<RectTransform>();
+        rt.localScale = new Vector3(.40f, .40f, .40f);
+        //moove the cooldown graphic in positive y axis direction by the graphic height (scaled)
+        //move it in the negative x axis direction by half the width of the canvas (plus the graphic width scaled)
+        rt.anchoredPosition = new Vector2((rt.localScale.x * rt.rect.width * i) - (bar.GetComponent<RectTransform>().rect.width / 2), rt.localScale.y * rt.rect.height);
+        abilityCooldownControllers.Add(ac);
+        //handle cooldown stuff
+        spellSlotCooldownTimers[i] = 0f;
+    }
+
     public List<GameObject> GetSpellSlots()
     {
         return spellSlots;

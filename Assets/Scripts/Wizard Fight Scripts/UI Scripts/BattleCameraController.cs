@@ -51,7 +51,8 @@ public class BattleCameraController : MonoBehaviour
     {
         if (players.Length == 1)
         {
-            c.transform.LookAt(players[0].GetComponent<Transform>().position);
+            transform.RotateAround(players[0].GetComponent<Transform>().position, Vector3.up, 30 * Time.deltaTime);
+            //c.transform.LookAt(players[0].GetComponent<Transform>().position);
         }
         else {
             //position the camera at the middle    

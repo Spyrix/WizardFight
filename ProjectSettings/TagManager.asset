@@ -12,6 +12,8 @@ TagManager:
   - Interactable
   - AimingUI
   - MenuOption
+  - IconSpell
+  - SpellSelectCursor
   layers:
   - Default
   - TransparentFX
