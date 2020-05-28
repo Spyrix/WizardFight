@@ -11,11 +11,17 @@ public class BattleManager : MonoBehaviour
      * */
     [SerializeField]
     internal Vector3[] playerSpawnPoints;
-
+    PlayerInputActions inputAction;
+    [SerializeField]
+    internal GameObject pauseCanvas;
 
     //list of all active players in scene
     GameObject[] players;
     bool gameOver = false;
+    [SerializeField]
+    internal bool togglePause = true;
+    [SerializeField]
+    internal float pauseInput;
     // Start is called before the first frame update
     void Awake()
     {
@@ -41,15 +47,60 @@ public class BattleManager : MonoBehaviour
             }
             //Track player
             players[i] = player;
+            players[i].GetComponent<PlayerInputScript>().SetPlayerNumber(i);
             //Get rid of extraneous cursor object
-            //Destroy(playerInfo[i]);
+            Destroy(playerInfo[i]);
         }
+
+        //Get Pause input
+        inputAction = new PlayerInputActions();
+        inputAction.PlayerControls.Pause.performed += ctx => pauseInput = ctx.ReadValue<float>();
+        inputAction.PlayerControls.Pause.canceled += ctx => pauseInput = ctx.ReadValue<float>();
     }
+
+    //OnEnable and OnDisable are required for the inputAction class to work
+    private void OnEnable()
+    {
+        inputAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputAction.Disable();
+    }
+
 
     // Update is called once per frame
     void Update()
     {
         VictoryCondition();
+        //Pausing mid battle
+        if (pauseInput > 0 && togglePause && pauseCanvas.activeSelf == false)
+        {
+            Pause();
+            togglePause = false;
+        }
+        if (pauseInput > 0 && togglePause && pauseCanvas.activeSelf == true)
+        {
+            UnPause();
+            togglePause = false;
+        }
+        if (pauseInput == 0)
+        {
+            togglePause = true;
+        }
+    }
+
+    internal void Pause()
+    {
+        Time.timeScale = 0;
+        pauseCanvas.SetActive(true);
+    }
+
+    internal void UnPause()
+    {
+        Time.timeScale = 1;
+        pauseCanvas.SetActive(false);
     }
 
     void VictoryCondition()

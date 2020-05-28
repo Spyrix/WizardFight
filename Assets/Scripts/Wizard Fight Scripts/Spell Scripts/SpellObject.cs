@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpellObject : MonoBehaviour
 {
@@ -47,6 +48,11 @@ public class SpellObject : MonoBehaviour
     }
 
     public virtual GameObject GetSpellOwner()
+    {
+        return null;
+    }
+
+    public virtual Sprite GetSpellIcon()
     {
         return null;
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BlinkSpell : SpellObject
 {
@@ -11,6 +12,8 @@ public class BlinkSpell : SpellObject
     internal float spellCooldownTime = 8f;
     [SerializeField]
     internal GameObject aimPrefab;
+    [SerializeField]
+    internal Sprite spellIcon;
 
     // Start is called before the first frame update
 
@@ -34,5 +37,10 @@ public class BlinkSpell : SpellObject
     public float GetDamage()
     {
         return damage;
+    }
+
+    public override Sprite GetSpellIcon()
+    {
+        return spellIcon;
     }
 }

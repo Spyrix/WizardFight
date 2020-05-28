@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
@@ -18,17 +19,20 @@ public class SpellSelectScript : MonoBehaviour
     internal int playerNumber;
     [SerializeField]
     internal GameObject[] selections;
+    [SerializeField]
+    internal GameObject[] selectionIcons;
     Vector2 movementInput;
     [SerializeField]
     internal float[] selectInputArray;
     float cursorSpeed;
+    InputUser _user;
 
     // Start is called before the first frame update
     void Awake()
     {
         cursorSpeed = 150f;
         //Should not hardcode this, temporary
-        transform.position = new Vector3(15,40,64);
+        transform.position = new Vector3(15,40,82);
         mesh = GetComponent<MeshFilter>().mesh;
         CreateShape();
         UpdateMesh();
@@ -38,7 +42,7 @@ public class SpellSelectScript : MonoBehaviour
         inputAction = new PlayerInputActions();
 
         //Here we handle multiple users
-        InputUser _user = new InputUser();
+        _user = new InputUser();
         if (playerNumber >= Gamepad.all.Count)
         {
             //This means that somehow, there are more players in the game then gamepads
@@ -131,6 +135,9 @@ public class SpellSelectScript : MonoBehaviour
                 //If a player is pressing a spell button to make a selection, add it to their selections
                 if (selectInputArray[i] > 0){
                     selections[i] = collision.gameObject.GetComponent<SpellMenuContainer>().GetSpellPrefab();
+                    //enable the spell icon on the cursor and change the graphic
+                    selectionIcons[i].SetActive(true);
+                    selectionIcons[i].GetComponent<SpriteRenderer>().sprite = collision.gameObject.GetComponent<SpellMenuContainer>().GetSprite();
                 }
             }
         }
@@ -139,6 +146,15 @@ public class SpellSelectScript : MonoBehaviour
     public void SetPlayerNumber(int i)
     {
         playerNumber = i;
+        _user = new InputUser();
+        if (playerNumber >= Gamepad.all.Count)
+        {
+            //This means that somehow, there are more players in the game then gamepads
+            //Remember to throw an exception
+            playerNumber = 0;
+        }
+        _user = InputUser.PerformPairingWithDevice(Gamepad.all[playerNumber]);
+        _user.AssociateActionsWithUser(inputAction);
     }
 
     public GameObject[] GetSpellSelection()

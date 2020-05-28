@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 [RequireComponent(typeof(Transform))]
@@ -20,6 +21,8 @@ public class DisintegrateSpell : SpellObject
     internal float spellCooldownTime = 2f;
     [SerializeField]
     internal GameObject aimPrefab;
+    [SerializeField]
+    internal Sprite spellIcon;
 
     // Start is called before the first frame update
     void Awake()
@@ -82,5 +85,10 @@ public class DisintegrateSpell : SpellObject
     public override GameObject GetAimPrefab()
     {
         return aimPrefab;
+    }
+
+    public override Sprite GetSpellIcon()
+    {
+        return spellIcon;
     }
 }

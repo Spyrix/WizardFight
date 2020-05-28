@@ -1,13 +1,18 @@
 Features to Implement:
-Pausing
-Spell Select Menu
-Arena Select Menu
-Enable spells to be insta-cast, for future implementation
+
+Enable spells to be insta-cast, for the future
 Game Sounds
 Game Music
+two complete stages
+four new spells
 
+Polish:
+spell icon graphics
+adding icons for the spell select cursor and the ability cooldowns
 
 Bugs to fix:
+camera still messes up when you move the players too close together
+Rework Jump mechanic so that it lags a little at the top. Like a bellcurve for vertical velocity
 Ensure that spell select cursors do not move out of camera sight
 Comment all files
 Unplugging a controller should cause the game to pause
@@ -15,3 +20,9 @@ players can collide with objects and climb them? Rigidbody BS
 Get rid of all warnings in console
 try to remove gameobject.find and just use references
 Due to how the player state machine works, pressing the cancel button while holding a spell input button will put the player back into casting mode. 
+
+//to push
+Pausing
+Spell selection screen done
+stage selection screen done
+victory condition done

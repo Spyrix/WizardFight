@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ElectricSpell : SpellObject
 {
-    internal float damage = -50f;
+    internal float damage = -10f;
     internal float duration = 4f;
     internal float timer = 0f;
     bool move = false;
@@ -14,6 +15,8 @@ public class ElectricSpell : SpellObject
     internal GameObject aimPrefab;
     [SerializeField]
     internal GameObject spellOwner;
+    [SerializeField]
+    internal Sprite spellIcon;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +31,6 @@ public class ElectricSpell : SpellObject
             Destroy(gameObject);
         }
     }
-
 
     public override void Cast(Transform t)
     {
@@ -56,5 +58,9 @@ public class ElectricSpell : SpellObject
     public override GameObject GetSpellOwner()
     {
         return spellOwner;
+    }
+    public override Sprite GetSpellIcon()
+    {
+        return spellIcon;
     }
 }

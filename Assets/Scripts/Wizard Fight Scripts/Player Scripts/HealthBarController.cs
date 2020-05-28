@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class HealthBarController : MonoBehaviour
 {
     // Start is called before the first frame update
-    Transform mainCameraTransform;
+    [SerializeField]
+    internal Transform mainCameraTransform;
     Transform t;
     GameObject slider;
     void Start()
     {
-        mainCameraTransform = GameObject.Find("PlayerCamera").GetComponent<Transform>();
+        if (mainCameraTransform == null) {
+            mainCameraTransform = GameObject.Find("PlayerCamera").GetComponent<Transform>();
+        }
         t = GetComponent<Transform>();
         slider = t.Find("Slider").gameObject;
         slider.GetComponent<Slider>().value = 1f;

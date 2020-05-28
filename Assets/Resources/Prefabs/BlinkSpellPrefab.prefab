@@ -47,7 +47,7 @@ MonoBehaviour:
   spellCooldownTime: 8
   aimPrefab: {fileID: 5975158298772181623, guid: 432244cd26334a1408d3ed914cfc0952,
     type: 3}
-  aimGameObject: {fileID: 0}
+  spellIcon: {fileID: 21300000, guid: 3b23805ded251204eac549a7b004cb82, type: 3}
 --- !u!114 &5959756063866308845
 MonoBehaviour:
   m_ObjectHideFlags: 0

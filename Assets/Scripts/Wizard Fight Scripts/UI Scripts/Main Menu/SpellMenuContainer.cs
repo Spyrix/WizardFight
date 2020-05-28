@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(BoxCollider))]
 public class SpellMenuContainer : MonoBehaviour
@@ -9,7 +10,8 @@ public class SpellMenuContainer : MonoBehaviour
     [SerializeField]
     internal GameObject spellPrefab;
 
-    
+    [SerializeField]
+    internal Sprite spellIcon;
 
     void Awake()
     {
@@ -26,6 +28,11 @@ public class SpellMenuContainer : MonoBehaviour
     public GameObject GetSpellPrefab()
     {
         return spellPrefab;
+    }
+
+    public Sprite GetSprite()
+    {
+        return spellIcon;
     }
 
 }

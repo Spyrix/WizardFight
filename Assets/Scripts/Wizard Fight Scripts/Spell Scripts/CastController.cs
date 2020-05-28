@@ -47,4 +47,8 @@ public class CastController : MonoBehaviour
     {
         so.SetAimGameObject(go);
     }
+    public SpellObject GetSpellObject()
+    {
+        return so;
+    }
 }

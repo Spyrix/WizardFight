@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Transform))]
 [RequireComponent(typeof(Rigidbody))]
@@ -17,6 +18,9 @@ public class IceSpell : SpellObject
     internal float spellCooldownTime = 4f;
     [SerializeField]
     internal GameObject aimPrefab;
+    [SerializeField]
+    internal Sprite spellIcon;
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -40,6 +44,8 @@ public class IceSpell : SpellObject
             spellTransform.Translate(movementVector * speed, Space.World);
         }
     }
+
+
 
     internal void SetMove(bool a)
     {
@@ -78,5 +84,10 @@ public class IceSpell : SpellObject
     public override GameObject GetAimPrefab()
     {
         return aimPrefab;
+    }
+
+    public override Sprite GetSpellIcon()
+    {
+        return spellIcon;
     }
 }

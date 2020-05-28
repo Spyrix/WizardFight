@@ -19,7 +19,7 @@ public class PlayerInputScript : MonoBehaviour
     [SerializeField]
     internal int playerNumber = -1;
     Rigidbody playerRB;
-
+    InputUser _user;
     internal IPlayerState currentState;
 
     private void Awake()
@@ -35,7 +35,7 @@ public class PlayerInputScript : MonoBehaviour
         spellInputTable = new float[4];
 
         //Here we handle multiple users
-        InputUser _user = new InputUser();
+        _user = new InputUser();
         if (playerNumber>=Gamepad.all.Count)
         {
             //This means that somehow, there are more players in the game then gamepads
@@ -136,6 +136,15 @@ public class PlayerInputScript : MonoBehaviour
     public void SetPlayerNumber(int p)
     {
         playerNumber = p;
+        _user = new InputUser();
+        if (playerNumber >= Gamepad.all.Count)
+        {
+            //This means that somehow, there are more players in the game then gamepads
+            //Remember to throw an exception
+            playerNumber = 0;
+        }
+        _user = InputUser.PerformPairingWithDevice(Gamepad.all[playerNumber]);
+        _user.AssociateActionsWithUser(inputAction);
     }
     //###
 

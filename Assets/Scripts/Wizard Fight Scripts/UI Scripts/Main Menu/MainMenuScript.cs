@@ -169,11 +169,7 @@ public class MainMenuScript : MonoBehaviour
 
             //Do NOT delete the cursors during the stage select, as that is where we are storing
             //player selection data. Just make it so that they don't appear.
-            foreach (GameObject g in playerSelectCursors)
-            {
-                if (g != null)
-                    g.GetComponent<MeshRenderer>().enabled = false;
-            }
+            HideSpellCursors();
             EventSystem.current.SetSelectedGameObject(SandboxStageButton);
         }
     }
@@ -186,7 +182,7 @@ public class MainMenuScript : MonoBehaviour
     //Return buttons
     public void ReturnToSpellSelectButton()
     {
-        //Takes us from the stage select screen back to soell select
+        //Takes us from the stage select screen back to spell select
         foreach (GameObject g in allCanvases)
         {
             g.SetActive(false);
@@ -195,11 +191,12 @@ public class MainMenuScript : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(BackToModeSelectButton);
 
         //Re-enable the player select cursor, since we disabled them earlier
-        foreach (GameObject g in playerSelectCursors)
-        {
-            if (g != null)
-                g.GetComponent<MeshRenderer>().enabled = false;
-        }
+        ShowSpellCursors();
+           // foreach (GameObject g in playerSelectCursors)
+           // {
+           // if (g != null)
+           //  g.GetComponent<MeshRenderer>().enabled = false;
+           // }
     }
 
     public void ReturnToStartButton()
@@ -224,6 +221,39 @@ public class MainMenuScript : MonoBehaviour
         for (int i = 0; i < playerSelectCursors.Length; i++)
         {
             Destroy(playerSelectCursors[i]);
+        }
+    }
+
+    public void HideSpellCursors()
+    {
+        foreach (GameObject g in playerSelectCursors)
+        {
+            if (g != null)
+            {
+                g.GetComponent<MeshRenderer>().enabled = false;
+                //also disable the icons
+                for(int c = 0; c < g.transform.childCount; c++)
+                {
+                    g.transform.GetChild(c).gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
+
+    public void ShowSpellCursors()
+    {
+        foreach (GameObject g in playerSelectCursors)
+        {
+            if (g != null)
+            {
+                g.GetComponent<MeshRenderer>().enabled = true;
+                //also disable the icons
+                for (int c = 0; c < g.transform.childCount; c++)
+                {
+                    g.transform.GetChild(c).gameObject.SetActive(true);
+                }
+            }
         }
     }
 }
