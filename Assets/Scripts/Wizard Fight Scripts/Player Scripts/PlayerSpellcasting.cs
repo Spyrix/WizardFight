@@ -7,7 +7,7 @@ public class PlayerSpellcasting : MonoBehaviour
 {
     //Spell objects are game objects that do the spells. 
     [SerializeField]
-    List<GameObject> spellSlots;
+    internal List<GameObject> spellSlots;
     List<GameObject> abilityCooldownControllers;
     GameObject[] abilityAimGameObjects;
     int[] spellNumMapping;
@@ -22,20 +22,23 @@ public class PlayerSpellcasting : MonoBehaviour
     void Awake()
     {
         spellSlotCooldownTimers = new float[3];
-        spellSlots = new List<GameObject>();
+        if(spellSlots.Count == 0)//For debug purposes, sometimes it may have spells attached already
+            spellSlots = new List<GameObject>();
         abilityCooldownControllers = new List<GameObject>();
         abilityAimGameObjects = new GameObject[3];
         playerScript = GetComponent<PlayerScript>();
 
         //For debug
-        /*spellSlots.Add(Resources.Load<GameObject>("Prefabs/IceSpellPrefab"));
+        //spellSlots.Add(Resources.Load<GameObject>("Prefabs/IceSpellPrefab"));
         //create the UI element for each spellslot
         for (int i = 0; i < spellSlots.Count; i++)
         {
             //Instantiate graphic and attach it to the player status bar, above each player's head
             GameObject bar = transform.Find("PlayerStatusBar").gameObject;
             GameObject ac = Instantiate(Resources.Load<GameObject>("Prefabs/AbilityCooldownPrefab"),bar.transform);
-            //ac.transform.SetParent(bar.transform);
+            GameObject cooldownImage = ac.transform.Find("Center").gameObject;
+            cooldownImage.GetComponent<Image>().sprite = spellSlots[i].GetComponent<CastController>().GetSpellObject().GetSpellIcon();
+            ac.transform.SetParent(bar.transform);
 
             //Giving the ability cooldown graphic different text//features depending on their spell slot/button
             switch (i)
@@ -66,7 +69,7 @@ public class PlayerSpellcasting : MonoBehaviour
         for (int i = 0; i < spellSlotCooldownTimers.Length; i++)
         {
             spellSlotCooldownTimers[i] = 0f;
-        }*/
+        }
     }
 
     // Update is called once per frame
@@ -177,7 +180,6 @@ public class PlayerSpellcasting : MonoBehaviour
         abilityCooldownControllers.Add(ac);
         //handle cooldown stuff
         spellSlotCooldownTimers[i] = 0f;
-        Debug.Log(rt.anchoredPosition);
     }
 
     public List<GameObject> GetSpellSlots()

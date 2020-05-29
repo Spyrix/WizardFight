@@ -7,22 +7,24 @@ two complete stages
 four new spells
 
 Polish:
-spell icon graphics
-adding icons for the spell select cursor and the ability cooldowns
+Jump animation
 
 Bugs to fix:
-camera still messes up when you move the players too close together
-Rework Jump mechanic so that it lags a little at the top. Like a bellcurve for vertical velocity
-Ensure that spell select cursors do not move out of camera sight
-Comment all files
-Unplugging a controller should cause the game to pause
+Camera shakes sometimes, especially when there's rigidbody bs happening
 players can collide with objects and climb them? Rigidbody BS
+Ensure that spell select cursors do not move out of camera sight
+Unplugging a controller should cause the game to pause and NOT CRASH
 Get rid of all warnings in console
 try to remove gameobject.find and just use references
-Due to how the player state machine works, pressing the cancel button while holding a spell input button will put the player back into casting mode. 
+Comment all files
+Remove castcontroller? seems extraneous
 
-//to push
-Pausing
-Spell selection screen done
-stage selection screen done
-victory condition done
+done:
+spell icon graphics
+Rework Jump mechanic so that it lags a little at the top. Like a bellcurve for vertical velocity
+adding icons for the spell select cursor and the ability cooldowns
+camera still messes up when you move the players too close together
+	--fixed by making camera y dependent on distance between furthest players
+Due to how the player state machine works, pressing the cancel button while holding a spell input button will put the player back into casting mode. 
+	--Just make it so that the player can't cast spells if cancel input is being held
+Elec spell drains HP incredibly fast after the invinciblity wears off, for some reason

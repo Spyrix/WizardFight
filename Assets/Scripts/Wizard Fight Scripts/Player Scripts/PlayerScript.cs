@@ -103,9 +103,9 @@ public class PlayerScript : MonoBehaviour
         spellcastingScript.Cast(spellNumber, playerTransform);
     }
 
-    internal void Jump(bool walking)
+    internal void Jump(bool walking, float jumpTimer, Vector2 movementInput)
     {
-        movementScript.Jump(walking);
+        movementScript.Jump(walking, jumpTimer, movementInput);
         animationScript.PlayJump();
     }
 

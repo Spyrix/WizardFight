@@ -7,11 +7,10 @@ public class PlayerMovementScript : MonoBehaviour
 {
     float walkSpeed = 6f;
     float runSpeed = 4f;
-    float jumpSpeed = 0.3f;
+    float jumpSpeed = .05f;
     [SerializeField]
     float movementSpeed;
     float turnSpeed = 100f;
-
 
     [SerializeField]
     internal Transform playerTransform;
@@ -59,16 +58,12 @@ public class PlayerMovementScript : MonoBehaviour
             movementSpeed = walkSpeed + runSpeed;
     }
 
-    internal void Jump(bool walking)
+    internal void Jump(bool walking, float jumpTimer, Vector2 movementInput)
     {
-        float xMovement = 0.0f;
-        float zMovement = 0.0f;
-        if (walking)
-        {
-            float forwardMovement = movementSpeed * Time.deltaTime;
-            xMovement = playerTransform.forward.x * forwardMovement;
-            zMovement = playerTransform.forward.z * forwardMovement;
-        }
-        playerTransform.Translate(new Vector3(xMovement, jumpSpeed, zMovement), Space.World);
+        float yMovement = Mathf.Pow(jumpTimer, -1) * jumpSpeed;
+        playerTransform.Translate(new Vector3(0, yMovement, 0), Space.World);
+        //Allow the player to move in the air because it's fun
+        RotatePlayer(movementInput.x, movementInput.y);
+        GroundMovement(movementInput.x, movementInput.y);
     }
 }

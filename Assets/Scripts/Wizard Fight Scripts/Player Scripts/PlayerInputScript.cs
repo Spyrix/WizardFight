@@ -184,6 +184,7 @@ public class PlayerStateIdle : IPlayerState
     Vector2 mi;
     Vector2 ri;
     float ji;
+    float cancelSpell;
     float[] spellInputTable;
     /*The constructor takes in the player input script because it needs 
     * to be able to communicate with the player and accept data about the
@@ -202,6 +203,7 @@ public class PlayerStateIdle : IPlayerState
         ri = pi.GetRunInput();
         ji = pi.GetJumpInput();
         spellInputTable = pi.GetSpellInputTable();
+        cancelSpell = pi.GetCancelInput();
     }
     public void HandleInput()
     {
@@ -212,7 +214,7 @@ public class PlayerStateIdle : IPlayerState
         //check to see if a spell input was pressed
         for (int i = 0; i<spellInputTable.Length;i++)
         {
-            if (spellInputTable[i] == 1f)
+            if (spellInputTable[i] == 1f && cancelSpell == 0f)
             {
                 //Decide if the spell should be cast or is being aimed
                 pi.currentState = new PlayerStateAiming(pi, i);
@@ -238,6 +240,7 @@ public class PlayerStateWalking : IPlayerState
     Vector2 ri;
     float[] spellInputTable;
     float ji;
+    float cancelSpell;
     public PlayerStateWalking(PlayerInputScript player)
     {
         pi = player;
@@ -250,6 +253,7 @@ public class PlayerStateWalking : IPlayerState
         ji = pi.GetJumpInput();
         pi.playerScript.GroundMovement(mi.x, mi.y, mi.magnitude);
         pi.playerScript.Run(ri.magnitude);
+        cancelSpell = pi.GetCancelInput();
     }
     public void HandleInput()
     {
@@ -258,7 +262,7 @@ public class PlayerStateWalking : IPlayerState
         //check to see if a spell input was pressed
         for (int i = 0; i < spellInputTable.Length; i++)
         {
-            if (spellInputTable[i] == 1f)
+            if (spellInputTable[i] == 1f && cancelSpell == 0f)
             {
                 //Decide if the spell should be cast, or is being aimed
                 pi.currentState = new PlayerStateAiming(pi, i);
@@ -279,6 +283,7 @@ public class PlayerStateAiming : IPlayerState
     Vector2 mi;
     float ci;
     int spellNum;
+    float cancelSpell;
     float[] spellInputTable;
     public PlayerStateAiming(PlayerInputScript player, int sn)
     {
@@ -293,9 +298,14 @@ public class PlayerStateAiming : IPlayerState
         //pass in the movement input vector so we know what direction to aim in
         pi.playerScript.SpellAim(mi.x,mi.y);
         spellInputTable = pi.GetSpellInputTable();
+        cancelSpell = pi.GetCancelInput();
     }
     public void HandleInput()
     {
+        if (cancelSpell == 1f)
+        {
+            pi.currentState = new PlayerStateIdle(pi);
+        }
         if (spellInputTable[spellNum] == 0f)
         {
             pi.currentState = new PlayerStateCasting(pi, spellNum);
@@ -337,6 +347,7 @@ public class PlayerStateCasting : IPlayerState
 
 public class PlayerStateJumping : IPlayerState
 {
+    Vector2 mi;
     float jumpTimer = 0.0f;
     float jumpTimeMax = 1.0f;
     bool walking = false;
@@ -348,8 +359,9 @@ public class PlayerStateJumping : IPlayerState
     }
     public void StateUpdate()
     {
-        jumpTimer += 0.1f;
-        pi.playerScript.Jump(walking);
+        jumpTimer += Time.deltaTime;
+        mi = pi.GetMovementInput();
+        pi.playerScript.Jump(walking, jumpTimer, mi);
     }
     public void HandleInput()
     {

@@ -16,7 +16,8 @@ public class BattleManager : MonoBehaviour
     internal GameObject pauseCanvas;
 
     //list of all active players in scene
-    GameObject[] players;
+    [SerializeField]
+    internal GameObject[] players;
     bool gameOver = false;
     [SerializeField]
     internal bool togglePause = true;
@@ -32,9 +33,9 @@ public class BattleManager : MonoBehaviour
             new Vector3(7,-.2f,-30),
             new Vector3(48,-.2f,-30),
         };
-        players = new GameObject[4];
+        if(players.Length == 0)//For debug, sometimes there may already be players in the array for debug purposes
+            players = new GameObject[4];
         GameObject[] playerInfo = GameObject.FindGameObjectsWithTag("SpellSelectCursor");
-        Debug.Log(playerInfo.Length);
         for (int i = 0; i< playerInfo.Length; i++)
         {
             //create player in world at spawn point
@@ -51,7 +52,6 @@ public class BattleManager : MonoBehaviour
             //Get rid of extraneous cursor object
             Destroy(playerInfo[i]);
         }
-
         //Get Pause input
         inputAction = new PlayerInputActions();
         inputAction.PlayerControls.Pause.performed += ctx => pauseInput = ctx.ReadValue<float>();

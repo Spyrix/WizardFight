@@ -29,28 +29,31 @@ public class PlayerHealthController : MonoBehaviour
 
     public void addHealth(float healthAmount)
     {
+
         //Only modify health if invulnerability is off or if the health is a positive value
-        if (invulnerableOn != true || healthAmount >= 0) {
+        if (!invulnerableOn && healthAmount < 0) {
             playerHealth += healthAmount;
-            //Don't go over 100 health
-            if (playerHealth > playerMaxHealth)
-            {
-                playerHealth = playerMaxHealth;
-            }
-            //update health in healthbar
-            GameObject healthBar = transform.Find("PlayerStatusBar").gameObject;
-            healthBar.GetComponent<HealthBarController>().UpdateHealth(playerHealth, playerMaxHealth);
-        }
-        if (playerHealth <= 0)
-        {
-            //death!!!!
-            playerScript.Death();
-        }
-        //If the player takes damage, give them invulnerability frames
-        if (healthAmount < 0)
-        {
             SetPlayerInvulnerable(1f);
         }
+        else if(healthAmount > 0)
+        {
+            playerHealth += healthAmount;
+        }
+        //Check for death condition
+        if (playerHealth <= 0)
+        {
+            playerScript.Death();
+        }
+
+        //Don't go over 100 health
+        if (playerHealth > playerMaxHealth)
+        {
+            playerHealth = playerMaxHealth;
+        }
+
+        //Update health in healthbar
+        GameObject healthBar = transform.Find("PlayerStatusBar").gameObject;
+        healthBar.GetComponent<HealthBarController>().UpdateHealth(playerHealth, playerMaxHealth);
     }
 
     public float GetPlayerHealth()

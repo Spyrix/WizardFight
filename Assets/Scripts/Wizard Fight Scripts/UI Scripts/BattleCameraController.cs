@@ -55,6 +55,7 @@ public class BattleCameraController : MonoBehaviour
             //c.transform.LookAt(players[0].GetComponent<Transform>().position);
         }
         else {
+            float distanceBetweenPlayers = Vector3.Distance(furthestPlayers[0], furthestPlayers[1]);
             //position the camera at the middle    
             Vector3 midPoint = (furthestPlayers[0] + furthestPlayers[1]) * 0.5f;
             Vector3 newCameraPos = c.transform.position;
@@ -69,10 +70,12 @@ public class BattleCameraController : MonoBehaviour
             {
                 newCameraPos.z += 1f;
             }
+            //The distance between players should determine how high the camera is
+            Debug.Log(distanceBetweenPlayers);
             c.transform.position = newCameraPos;
 
             //find the distance between 2 players
-            float distanceBetweenPlayers = Vector3.Distance(furthestPlayers[0], furthestPlayers[1]);
+  
 
             const float DISTANCE_MARGIN = 10.0f;
             float aspectRatio = Screen.width / Screen.height;
@@ -80,8 +83,6 @@ public class BattleCameraController : MonoBehaviour
 
             //calculate new camera distance
             float cameraDistance = (distanceBetweenPlayers / 2.0f / aspectRatio) / tanFov;
-            //store the current camera distance for later
-            currentCameraDistance = cameraDistance;
             // Set camera to new position.
             Vector3 dir = (c.transform.position - midPoint).normalized;
             c.transform.LookAt(midPoint);
