@@ -10,7 +10,7 @@ Polish:
 Jump animation
 
 Bugs to fix:
-Camera shakes sometimes, especially when there's rigidbody bs happening
+
 players can collide with objects and climb them? Rigidbody BS
 Ensure that spell select cursors do not move out of camera sight
 Unplugging a controller should cause the game to pause and NOT CRASH
@@ -20,6 +20,11 @@ Comment all files
 Remove castcontroller? seems extraneous
 
 done:
+5/29
+--
+Camera zoom still not zooming out - sorta, I'm happy enough
+--
+
 spell icon graphics
 Rework Jump mechanic so that it lags a little at the top. Like a bellcurve for vertical velocity
 adding icons for the spell select cursor and the ability cooldowns

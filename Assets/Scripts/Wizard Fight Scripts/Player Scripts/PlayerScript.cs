@@ -16,7 +16,6 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerSpellcasting))]
 [RequireComponent(typeof(PlayerAnimation))]
 [RequireComponent(typeof(PlayerHealthController))]
-[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(MeshCollider))]
 public class PlayerScript : MonoBehaviour
 {
@@ -75,6 +74,7 @@ public class PlayerScript : MonoBehaviour
 
     internal void Idle()
     {
+        animationScript.LeaveJumpState();
         animationScript.LeaveWalkingState();
         animationScript.LeaveSpellAimingState();
     }

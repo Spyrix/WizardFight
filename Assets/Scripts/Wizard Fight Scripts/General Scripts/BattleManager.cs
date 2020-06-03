@@ -10,7 +10,7 @@ public class BattleManager : MonoBehaviour
      * ensuring that when the player 
      * */
     [SerializeField]
-    internal Vector3[] playerSpawnPoints;
+    internal List<Vector3> playerSpawnPoints;
     PlayerInputActions inputAction;
     [SerializeField]
     internal GameObject pauseCanvas;
@@ -26,13 +26,13 @@ public class BattleManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        playerSpawnPoints = new Vector3[] 
+        /*playerSpawnPoints = new Vector3[] 
         {
             new Vector3(7,.2f,-15),
             new Vector3(48,-.2f,-15),
             new Vector3(7,-.2f,-30),
             new Vector3(48,-.2f,-30),
-        };
+        };*/
         if(players.Length == 0)//For debug, sometimes there may already be players in the array for debug purposes
             players = new GameObject[4];
         GameObject[] playerInfo = GameObject.FindGameObjectsWithTag("SpellSelectCursor");

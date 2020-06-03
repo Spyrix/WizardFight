@@ -152,6 +152,7 @@ public class PlayerInputScript : MonoBehaviour
     {
         /*Used in idle and walking states to determine if the player can jump again 
          * (if the player is on the ground and has stopped ariel movement).*/
+        Debug.Log(playerRB.velocity.y);
         if (Mathf.Approximately(playerRB.velocity.y, 0.0f))
             return true;
         else

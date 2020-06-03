@@ -53,6 +53,13 @@ public class PlayerAnimation : MonoBehaviour
     internal void PlayJump()
     {
         //to be implemented
+        animator.SetBool("JumpState", true);
+    }
+
+    internal void LeaveJumpState()
+    {
+        //to be implemented
+        animator.SetBool("JumpState", false);
     }
 
     internal void PlayDeath()

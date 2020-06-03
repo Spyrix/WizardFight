@@ -35,6 +35,8 @@ public class MainMenuScript : MonoBehaviour
     internal GameObject BackToModeSelectButton;
     [SerializeField]
     internal GameObject SandboxStageButton;
+    [SerializeField]
+    internal GameObject SkullChamberStageButton;
 
     [SerializeField]
     internal GameObject[] playerSelectCursors;
@@ -112,6 +114,11 @@ public class MainMenuScript : MonoBehaviour
     public void ButtonStartSandbox()
     {
         SceneManager.LoadScene("SandboxScene");
+    }
+
+    public void ButtonStartSkullChamber()
+    {
+        SceneManager.LoadScene("SkullChamber");
     }
 
     public void ButtonQuit()

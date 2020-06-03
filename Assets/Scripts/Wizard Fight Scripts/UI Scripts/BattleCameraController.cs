@@ -8,7 +8,12 @@ public class BattleCameraController : MonoBehaviour
     // Start is called before the first frame update
     GameObject[] players;
     Camera c;
-    float currentCameraDistance = 0f;
+    Vector3 cameraOffset = new Vector3(0,20f,-20f);
+    private Vector3 velocity;
+    public float smoothTime = .5f;
+    public float minZoom = 200f;
+    public float maxZoom = 20f;
+    public float zoomLimit = 100f;
     void Awake()
     {
         //Get all the active players in the scene and put them in the list
@@ -16,11 +21,13 @@ public class BattleCameraController : MonoBehaviour
         c = GetComponent<Camera>();
     }
 
-    // Update is called once per frame
-    void Update()
+    // LateUpdate is called once per frame after update, because Update is where we move characters
+    void LateUpdate()
     {
         players = GameObject.FindGameObjectsWithTag("WizardCharacter");
-        AdjustCamera(GetPlayersWithGreatestDistance());
+        //AdjustCamera(GetPlayersWithGreatestDistance());
+        moveCamera(GetPlayersWithGreatestDistance());
+        zoomCamera(GetPlayersWithGreatestDistance());
     }
 
     Vector3[] GetPlayersWithGreatestDistance()
@@ -47,6 +54,34 @@ public class BattleCameraController : MonoBehaviour
         return playerPositions;
     }
 
+    void moveCamera(Vector3[] furthestPlayers)
+    {
+        if (players.Length == 1)
+        {
+            //Look at the victor
+            transform.RotateAround(players[0].GetComponent<Transform>().position, Vector3.up, 30 * Time.deltaTime);
+            c.transform.LookAt(players[0].GetComponent<Transform>().position);
+            //c.transform.LookAt(players[0].GetComponent<Transform>().position);
+        }
+        else
+        {
+            //Adjust offset
+            Vector3 midPoint = (furthestPlayers[0] + furthestPlayers[1]) * 0.5f;
+            Vector3 newPosition = midPoint + cameraOffset;
+            c.transform.position = Vector3.SmoothDamp(c.transform.position, newPosition, ref velocity, smoothTime);
+        }
+    }
+
+    void zoomCamera(Vector3[] furthestPlayers)
+    {
+        float distanceBetweenPlayers = Vector3.Distance(furthestPlayers[0], furthestPlayers[1]);
+        Debug.Log(distanceBetweenPlayers);
+        float newZoom = Mathf.Lerp(maxZoom,minZoom,distanceBetweenPlayers/zoomLimit);
+        //float newZoom = Mathf.Lerp(maxZoom,minZoom,300f);
+        c.fieldOfView = Mathf.Lerp(c.fieldOfView,newZoom,Time.deltaTime);
+    }
+
+    /*
     void AdjustCamera(Vector3[] furthestPlayers)
     {
         if (players.Length == 1)
@@ -71,7 +106,6 @@ public class BattleCameraController : MonoBehaviour
                 newCameraPos.z += 1f;
             }
             //The distance between players should determine how high the camera is
-            Debug.Log(distanceBetweenPlayers);
             c.transform.position = newCameraPos;
 
             //find the distance between 2 players
@@ -88,5 +122,5 @@ public class BattleCameraController : MonoBehaviour
             c.transform.LookAt(midPoint);
             c.transform.position = midPoint + dir * (cameraDistance + DISTANCE_MARGIN);
         }
-    }
+    }*/
 }
