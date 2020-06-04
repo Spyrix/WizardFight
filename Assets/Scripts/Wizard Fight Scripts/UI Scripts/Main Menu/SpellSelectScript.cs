@@ -51,10 +51,11 @@ public class SpellSelectScript : MonoBehaviour
         }
         _user = InputUser.PerformPairingWithDevice(Gamepad.all[playerNumber]);
         _user.AssociateActionsWithUser(inputAction);
-        //Setup input for Navigate movement value press
-        inputAction.MenuControls.Navigate.performed += ctx => movementInput = ctx.ReadValue<Vector2>();
-        //Setup input for horizontal movement release
-        inputAction.MenuControls.Navigate.canceled += ctx => movementInput = ctx.ReadValue<Vector2>();
+        //Setup input for Navigate movement value press AND release
+        //inputAction.MenuControls.Navigate.performed += ctx => movementInput = ctx.ReadValue<Vector2>();
+        //inputAction.MenuControls.Navigate.canceled += ctx => movementInput = ctx.ReadValue<Vector2>();
+        inputAction.PlayerControls.Walk.performed += ctx => movementInput = ctx.ReadValue<Vector2>();
+        inputAction.PlayerControls.Walk.canceled += ctx => movementInput = ctx.ReadValue<Vector2>();
         //Setup input for select input values.
         inputAction.PlayerControls.Spell0.performed += ctx => selectInputArray[0] = ctx.ReadValue<float>();
         inputAction.PlayerControls.Spell1.performed += ctx => selectInputArray[1] = ctx.ReadValue<float>();

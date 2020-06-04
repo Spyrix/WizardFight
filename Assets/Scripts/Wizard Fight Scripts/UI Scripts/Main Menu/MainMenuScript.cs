@@ -116,6 +116,12 @@ public class MainMenuScript : MonoBehaviour
         SceneManager.LoadScene("SandboxScene");
     }
 
+    public void ButtonDebugScene()
+    {
+        SceneManager.LoadScene("DebugScene");
+    }
+
+
     public void ButtonStartSkullChamber()
     {
         SceneManager.LoadScene("SkullChamber");

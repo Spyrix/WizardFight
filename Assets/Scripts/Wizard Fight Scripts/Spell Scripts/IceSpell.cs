@@ -11,7 +11,7 @@ public class IceSpell : SpellObject
     Vector3 movementVector;
     Transform spellTransform;
     Rigidbody spellRigidBody;
-    float speed = 0.09f;
+    float speed = .8f;
     internal float damage = 0f;
     bool move = false;
     [SerializeField]

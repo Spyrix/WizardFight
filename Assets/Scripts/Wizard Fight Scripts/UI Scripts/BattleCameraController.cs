@@ -12,7 +12,7 @@ public class BattleCameraController : MonoBehaviour
     private Vector3 velocity;
     public float smoothTime = .5f;
     public float minZoom = 200f;
-    public float maxZoom = 20f;
+    public float maxZoom = 40f;
     public float zoomLimit = 100f;
     void Awake()
     {
@@ -76,7 +76,8 @@ public class BattleCameraController : MonoBehaviour
     {
         float distanceBetweenPlayers = Vector3.Distance(furthestPlayers[0], furthestPlayers[1]);
         Debug.Log(distanceBetweenPlayers);
-        float newZoom = Mathf.Lerp(maxZoom,minZoom,distanceBetweenPlayers/zoomLimit);
+        //Add 12f to new zoom so that it doesn't totally ofuscate the menu bars
+        float newZoom = Mathf.Lerp(maxZoom,minZoom,distanceBetweenPlayers/zoomLimit)+12f;
         //float newZoom = Mathf.Lerp(maxZoom,minZoom,300f);
         c.fieldOfView = Mathf.Lerp(c.fieldOfView,newZoom,Time.deltaTime);
     }

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SkullChamber.unity
     guid: a983ca40ff99da5468b8f20962c3d954
+  - enabled: 1
+    path: Assets/Scenes/DebugScene.unity
+    guid: 162517535633a424fabb8a0b66579c4a
   m_configObjects: {}

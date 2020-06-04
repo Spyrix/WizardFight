@@ -14,7 +14,7 @@ public class DisintegrateSpell : SpellObject
     internal Transform spellTransform;
     [SerializeField]
     internal Rigidbody spellRigidBody;
-    internal float speed = 0.1f;
+    internal float speed = .8f;
     internal float damage = -25f;
     bool move = false;
     [SerializeField]
