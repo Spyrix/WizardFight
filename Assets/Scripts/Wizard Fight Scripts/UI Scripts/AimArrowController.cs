@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * This class controlls the arrow shaped aiming gameobject spawned when a player is aiming a projectile spell, like the ice spell.
+ */
+
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
 public class AimArrowController : MonoBehaviour,IAimPrefab
 {
-    // Start is called before the first frame update
+
     Mesh mesh;
 
     Vector3[] vertices;
@@ -38,6 +42,7 @@ public class AimArrowController : MonoBehaviour,IAimPrefab
         transform.forward = player.transform.forward;
     }
 
+    //Creates an arrow0shaped mesh.
     void CreateShape()
     {
         vertices = new Vector3[]
@@ -59,6 +64,7 @@ public class AimArrowController : MonoBehaviour,IAimPrefab
         };
     }
 
+    //Renders the mesh
     void UpdateMesh()
     {
         mesh.Clear();

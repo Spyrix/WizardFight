@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * This class basically holds the spellobject class for the prefab, so that you can just invoke a cast 
+ * function and not have to worry about getting the specific spellobject component to cast
+ * */
+
 [RequireComponent(typeof(SpellObject))]
 public class CastController : MonoBehaviour
 {
-    /*
-     * This class basically holds the spellobject class for the prefab, so that you can just invoke a cast 
-     * function and not have to worry about getting the specific spellobject component to cast
-     * */
 
     /*When attaching this script to a prefab (so that the playerspellcasting script can cast spells), 
      * make sure to assign the prefab's spellobject component to this variable.*/

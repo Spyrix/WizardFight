@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+//The movement and instansiation script for the ice spell
 [RequireComponent(typeof(Transform))]
 [RequireComponent(typeof(Rigidbody))]
 public class IceSpell : SpellObject
@@ -32,7 +32,7 @@ public class IceSpell : SpellObject
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         movement();
     }
@@ -46,7 +46,6 @@ public class IceSpell : SpellObject
     }
 
 
-
     internal void SetMove(bool a)
     {
         move = a;
@@ -57,6 +56,7 @@ public class IceSpell : SpellObject
         return damage;
     }
 
+    //Set the direction in which the spell will move
     public void SetMovementVector(Vector3 v)
     {
         movementVector = v;
@@ -65,9 +65,9 @@ public class IceSpell : SpellObject
     public void SetRotation(float y)
     {
         spellTransform.Rotate(new Vector3(0f, y, 90f), Space.Self);
-
     }
 
+    //This function instansiates a copy of the prefab it's attached to at the specified position
     public override void Cast(Transform playerTransform)
     {
         GameObject spell = Instantiate(gameObject, playerTransform.position + new Vector3(playerTransform.forward.x, .5f, playerTransform.forward.z) * 2, Quaternion.identity);

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//This is basically a base class for the other spell game objects that the player creates when they cast a spell. 
+
 public class SpellObject : MonoBehaviour
 {
-    //I'm going to level, this should like... probably 100% be an interface.
-    //I'll just like... fix it later hahahaha.
+
 
     void Start()
     {

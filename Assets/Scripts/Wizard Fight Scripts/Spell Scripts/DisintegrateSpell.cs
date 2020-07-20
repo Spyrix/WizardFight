@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+/* The class that holds constants for the disintegrate spell object.
+ * Also defines instansiation behavior.
+ */
 [RequireComponent(typeof(Transform))]
 [RequireComponent(typeof(Rigidbody))]
 public class DisintegrateSpell : SpellObject
@@ -35,7 +37,7 @@ public class DisintegrateSpell : SpellObject
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
             movement();
     }

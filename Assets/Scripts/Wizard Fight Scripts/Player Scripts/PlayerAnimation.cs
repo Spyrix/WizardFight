@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * This class adjusts booleans that control the character's animation state machine.
+ */
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimation : MonoBehaviour
 {

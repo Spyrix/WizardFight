@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//This spell is a little different from the other spell objects, because it merely defines where the player is teleporting to when the spell is cast
+
 public class BlinkSpell : SpellObject
 {
     internal float damage = 0f;
@@ -14,8 +16,6 @@ public class BlinkSpell : SpellObject
     internal GameObject aimPrefab;
     [SerializeField]
     internal Sprite spellIcon;
-
-    // Start is called before the first frame update
 
 
     public override void Cast(Transform t)

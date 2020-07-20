@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /*
- * Written by Will Frazee
- * This is the manager script for controlling everything that the player can do.
+ * This is the manager script for controlling everything that the player can do. 
  * If the input script wants to talk to the movement script, it must go through this script, for example.
  * This is to segregate code and make sure that we know exactly what is responsible for doing what.
+ * Essentially, this is the bridge between input, the game logic, and the animations.
  * 
- * In theory, attaching this script to any player character gameobject should make it controllable by the player.
+ * In theory, attaching this script to any player character gameobject should make it controllable by the player
+ * due to the fact that it requires so many components.
  */
 [RequireComponent(typeof(PlayerInputScript))]
 [RequireComponent(typeof(PlayerMovementScript))]
@@ -109,16 +110,7 @@ public class PlayerScript : MonoBehaviour
         animationScript.PlayJump();
     }
 
-    /*This is a debug function for the player state machine
-     * The gizmo will change a different color depending on the state
-     * internal void OnDrawGizmos()
-    {
-        float radius = 0.5f;
-        Gizmos.color = inputScript.currentState.GetColor();
-        Vector3 center = transform.position + new Vector3(0,3,0);
-        Gizmos.DrawSphere(center, radius);
-    }*/
-
+    //Starts the death process
     internal void Death()
     {
         inputScript.Death();
@@ -126,11 +118,13 @@ public class PlayerScript : MonoBehaviour
         StartCoroutine(WaitToDestroy(2f));
     }
 
+    //Returns player health
     public float GetPlayerHealth()
     {
         return healthScript.GetPlayerHealth();
     }
 
+    //Gets the player's attatched transform.
     public Transform GetPlayerTransform()
     {
         return playerTransform;
@@ -141,5 +135,15 @@ public class PlayerScript : MonoBehaviour
         yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }
+
+    /*This is a debug function for the player state machine
+     * The gizmo will change a different color depending on the state
+     * internal void OnDrawGizmos()
+    {
+        float radius = 0.5f;
+        Gizmos.color = inputScript.currentState.GetColor();
+        Vector3 center = transform.position + new Vector3(0,3,0);
+        Gizmos.DrawSphere(center, radius);
+    }*/
 }
 

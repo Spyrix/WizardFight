@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Governs what happens when the ElectricSpellObject collides with a player
 public class ElectricSpellCollision : MonoBehaviour
 {
+    //If the player enters the vicinity of the spell object, damage them
     internal void OnTriggerEnter(Collider collider)
     {
         GameObject go = collider.gameObject;
@@ -16,6 +17,7 @@ public class ElectricSpellCollision : MonoBehaviour
         }
     }
 
+    //If the player stays inside the spell object's collider, damage them
     internal void OnTriggerStay(Collider collider)
     {
         GameObject go = collider.gameObject;

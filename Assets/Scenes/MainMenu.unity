@@ -1303,6 +1303,7 @@ MonoBehaviour:
   ModeSelectMenuCanvas: {fileID: 1708720888}
   RegularSpellSelectCanvas: {fileID: 178532489}
   StageSelectCanvas: {fileID: 1813069927}
+  RegularSpellSelectCanvasReadyButton: {fileID: 1531067496}
   RegularBattleButton: {fileID: 228061685}
   PlaySandboxButton: {fileID: 1911090757}
   BackToModeSelectButton: {fileID: 1992240178}
@@ -3132,7 +3133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1531067497
 RectTransform:
   m_ObjectHideFlags: 0

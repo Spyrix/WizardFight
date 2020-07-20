@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//This class dictates what happens when a ice spell collides with a player
 public class IceSpellCollision : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -24,18 +24,18 @@ public class IceSpellCollision : MonoBehaviour
             //Disable spell collider and renderer
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            //Freeze the wizard character
             //disable animator
             go.GetComponent<Animator>().enabled = false;
             //disable inputscript
             go.GetComponent<PlayerInputScript>().enabled = false;
 
-            //##Change player shaders to snow
             Transform t = go.GetComponent<PlayerScript>().GetPlayerTransform();
             SkinnedMeshRenderer smr = t.Find("Body").GetComponent<SkinnedMeshRenderer>();
             //get the materials
             Material[] ms = smr.materials;
             Material[] ms_copy = new Material[ms.Length];
-            //Change all materials from the meshrenderer to plasma
+            //Change all materials from the meshrenderer to snow
             for (int i = 0; i < ms.Length; i++)
             {
                 ms_copy[i] = Resources.Load<Material>("Materials/SpellEffects/Snow");
@@ -58,8 +58,10 @@ public class IceSpellCollision : MonoBehaviour
     {
         //Wait for time seconds to revert frozen status
         yield return new WaitForSeconds(time);
+        //Make it so that the player can move again
         go.GetComponent<Animator>().enabled = true;
         go.GetComponent<PlayerInputScript>().enabled = true;
+        //put all the player's materials back to normal
         Material[] m = new Material[7];
         m[0] = Resources.Load<Material>("Materials/WizardCharacter/Clothes");
         m[1] = Resources.Load<Material>("Materials/WizardCharacter/Skin");

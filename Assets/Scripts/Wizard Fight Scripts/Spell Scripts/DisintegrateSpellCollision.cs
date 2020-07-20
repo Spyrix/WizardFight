@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Disintegrate spell object behavior when it collides with anything
 public class DisintegrateSpellCollision : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -43,6 +43,7 @@ public class DisintegrateSpellCollision : MonoBehaviour
             Destroy(gameObject);
         }
 
+        //If the collided game object is interactable, destroy it like it's melting
         else if (go.tag == "Interactable")
         {
             //Disable collider and renderer

@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * This class is used by spell objects to adjust the current health of a player.
+ * This class is also able to turn the player invulnerable to damage temporarily, so that the player is not continuously blasted by spells.
+ */
 public class PlayerHealthController : MonoBehaviour
 {
     [SerializeField]

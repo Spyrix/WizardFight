@@ -6,14 +6,16 @@ using UnityEngine.UIElements;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
+/*
+ * This script/game object is responsible for managing the UI of the main menu.
+ * It contains logic that transitions between the canvases of the main menu.
+ * It also holds information about which spells the players have selected on the spell select screen
+ * in the form of the SpellSelectCursor game objects.
+ */
+
 public class MainMenuScript : MonoBehaviour
 {
-    /*
-     * This script/game object is responsible for managing the UI of the main menu.
-     * 
-     * It also holds information about player 
-     * 
-     * */
+
 
     //Canvases
     GameObject[] allCanvases;
@@ -25,6 +27,9 @@ public class MainMenuScript : MonoBehaviour
     internal GameObject RegularSpellSelectCanvas;
     [SerializeField]
     internal GameObject StageSelectCanvas;
+
+    [SerializeField]
+    internal GameObject RegularSpellSelectCanvasReadyButton;
 
     //Buttons to default menu cursors at
     [SerializeField]
@@ -45,7 +50,7 @@ public class MainMenuScript : MonoBehaviour
     {
         allCanvases = new GameObject[]
         {
-            StartMenuCanvas,ModeSelectMenuCanvas,RegularSpellSelectCanvas
+            StartMenuCanvas,ModeSelectMenuCanvas,RegularSpellSelectCanvas,StageSelectCanvas
         };
         playerSelectCursors = new GameObject[4];
 
@@ -63,6 +68,10 @@ public class MainMenuScript : MonoBehaviour
         if (RegularSpellSelectCanvas && RegularSpellSelectCanvas.activeSelf == true)
         {
             HandleSpellSelectCursors();
+        }
+        if (RegularSpellSelectCanvas.activeSelf == true && CheckRegularBattleReady())
+        {
+            RegularSpellSelectCanvasReadyButton.SetActive(true);
         }
     }
 
@@ -228,6 +237,7 @@ public class MainMenuScript : MonoBehaviour
         {
             g.SetActive(false);
         }
+        RegularSpellSelectCanvasReadyButton.SetActive(false);
         ModeSelectMenuCanvas.SetActive(true);
         EventSystem.current.SetSelectedGameObject(RegularBattleButton);
         //Going back to mode select from the regular battle spell select, so gotta get rid of the spell select cursors

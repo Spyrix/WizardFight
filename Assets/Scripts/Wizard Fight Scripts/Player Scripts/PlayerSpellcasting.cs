@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/*
+ * This class holds which spells a player has selected for gameplay. It also controls the spell cooldown times, and spawns the aim arrows.
+ * 
+ */
 public class PlayerSpellcasting : MonoBehaviour
 {
     //Spell objects are game objects that do the spells. 
@@ -13,12 +16,10 @@ public class PlayerSpellcasting : MonoBehaviour
     int[] spellNumMapping;
     float[] spellSlotCooldownTimers;//One for each mapped spell
 
-    //maybe how this should be is... I have a list of all of the game object spells possible
-    //and only 4 can be flipped on to a character at the same time
     [SerializeField]
     internal PlayerScript playerScript;
 
-    // Start is called before the first frame update
+    // Awake is called when the script instance is forst loaded
     void Awake()
     {
         spellSlotCooldownTimers = new float[3];
@@ -78,10 +79,12 @@ public class PlayerSpellcasting : MonoBehaviour
         HandleSpellCooldowns();
     }
 
-    //Three different ways to cast a spell
-    //instant cast
-    //Aim and charge as projectile
-
+    
+    /*
+     * Steps to casting a spell:
+     * Is the spell on cooldown? If yes, can't cast.
+     * If no, then instansiate the associated spellobject prefab.
+     */
     internal void Cast(int spellNum, Transform playerTransform)
     {
 
@@ -93,6 +96,9 @@ public class PlayerSpellcasting : MonoBehaviour
         EndAiming();
     }
 
+    /*
+     * This fuction handles the spell cooldown GUI attached to the player characters.
+     */
     internal void HandleSpellCooldowns()
     {
         for (int i = 0; i < spellSlotCooldownTimers.Length; i++)
@@ -109,6 +115,7 @@ public class PlayerSpellcasting : MonoBehaviour
         }
     }
 
+    //If the spell can be aimed, then create an aim prefab and allow the player to control it.
     public void StartAiming(int spellNum)
     {
         //Debug.Log(spellSlots[spellNum]);
@@ -125,6 +132,7 @@ public class PlayerSpellcasting : MonoBehaviour
         }
     }
 
+    //End aiming by getting rid of the aiming prefab.
     public void EndAiming()
     {
         //Look for all possible aimprefabs and destroy them
@@ -139,6 +147,7 @@ public class PlayerSpellcasting : MonoBehaviour
         return spellSlotCooldownTimers;
     }
 
+    //Associate a spell object prefab with this character so that the player can cast it.
     public void AddSpellToSlot(GameObject g)
     {
         //add the prefab to the spellslot
@@ -173,7 +182,7 @@ public class PlayerSpellcasting : MonoBehaviour
         RectTransform rt = ac.GetComponent<RectTransform>();
         Debug.Log(rt.anchoredPosition);
         rt.localScale = new Vector3(.40f, .40f, .40f);
-        //moove the cooldown graphic in positive y axis direction by the graphic height (scaled)
+        //move the cooldown graphic in positive y axis direction by the graphic height (scaled)
         //move it in the negative x axis direction by half the width of the canvas (plus the graphic width scaled)
         //rt.anchoredPosition = new Vector2((rt.localScale.x * rt.rect.width * i) - (bar.GetComponent<RectTransform>().rect.width / 2), rt.localScale.y * rt.rect.height);
         rt.localPosition = new Vector3((rt.localScale.x * rt.rect.width * i) - (bar.GetComponent<RectTransform>().rect.width / 2), rt.localScale.y * rt.rect.height,0);

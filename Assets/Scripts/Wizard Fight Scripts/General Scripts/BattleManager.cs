@@ -84,18 +84,22 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    //Pauses the game
     internal void Pause()
     {
         Time.timeScale = 0;
         pauseCanvas.SetActive(true);
     }
 
+    //Unpauses the game
     internal void UnPause()
     {
         Time.timeScale = 1;
         pauseCanvas.SetActive(false);
     }
 
+    //Checks if the victory condition is met
+    //If so, return to main menu
     void VictoryCondition()
     {
         int activePlayers = 0;

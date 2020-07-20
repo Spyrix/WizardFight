@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * This class is responsible for controlling the aim reticle that appears when casting a spell like
+ * the electric spell.
+ * It can be moved across the area visible to the camera, a max distance away from the player.
+ */
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
 public class AimReticleController : MonoBehaviour,IAimPrefab
 {
-    // Start is called before the first frame update
     Mesh mesh;
 
     Vector3[] vertices;
@@ -34,6 +37,7 @@ public class AimReticleController : MonoBehaviour,IAimPrefab
         movement();
     }
 
+    //This method is used to create the custom reticle shaped mesh.
     void CreateShape()
     {
         vertices = new Vector3[]
@@ -63,6 +67,7 @@ public class AimReticleController : MonoBehaviour,IAimPrefab
         };
     }
 
+    //This method renders the mesh.
     void UpdateMesh()
     {
         mesh.Clear();
@@ -71,6 +76,7 @@ public class AimReticleController : MonoBehaviour,IAimPrefab
         mesh.triangles = triangles;
     }
 
+    //This function controls the movement and ensures that it can't move the max distance from player.
     internal void movement()
     {
 

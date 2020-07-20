@@ -5,12 +5,18 @@ using UnityEngine.InputSystem.Users;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+/*
+ * This script is attached to a cursor that a player uses to select spells on the spell selection menu.
+ * When the player hovers the spell select cursor gameobject over the spell menu option, they are able to select the spell.
+ */
+
+
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(MeshCollider))]
 public class SpellSelectScript : MonoBehaviour
 {
-    //This script is attached to a cursor that a player uses to 
+
     Mesh mesh;
     Vector3[] vertices;
     PlayerInputActions inputAction;
@@ -24,6 +30,9 @@ public class SpellSelectScript : MonoBehaviour
     Vector2 movementInput;
     [SerializeField]
     internal float[] selectInputArray;
+    [SerializeField]
+    internal GameObject playerText;
+
     float cursorSpeed;
     InputUser _user;
 
@@ -156,6 +165,7 @@ public class SpellSelectScript : MonoBehaviour
         }
         _user = InputUser.PerformPairingWithDevice(Gamepad.all[playerNumber]);
         _user.AssociateActionsWithUser(inputAction);
+        playerText.GetComponent<Text>().text = "Player " + i;
     }
 
     public GameObject[] GetSpellSelection()

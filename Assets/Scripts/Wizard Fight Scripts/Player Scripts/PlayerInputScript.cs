@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.InputSystem;
-
+/*
+ * This script accepts input from the player and transmits it through the PlayerScript to control the animations 
+ * and the game logic that controls the character in the game world.
+ * This script also controls the state machine that governs what behavior the character exhibits during the update function.
+ */
 public class PlayerInputScript : MonoBehaviour
 {
 
@@ -107,7 +111,6 @@ public class PlayerInputScript : MonoBehaviour
     /*
      * Get_Input functions are used by the state classes to determine when to switch states.
      */
-     //###
     public Vector2 GetMovementInput()
     {
         return movementInput;
@@ -133,6 +136,7 @@ public class PlayerInputScript : MonoBehaviour
         return spellInputTable;
     }
 
+    //Assigns the attached character gameobject a player number
     public void SetPlayerNumber(int p)
     {
         playerNumber = p;
@@ -148,10 +152,10 @@ public class PlayerInputScript : MonoBehaviour
     }
     //###
 
+    /*Used in idle and walking states to determine if the player can jump again 
+     * (if the player is on the ground and has stopped ariel movement).*/
     public bool IsGrounded()
     {
-        /*Used in idle and walking states to determine if the player can jump again 
-         * (if the player is on the ground and has stopped ariel movement).*/
         Debug.Log(playerRB.velocity.y);
         if (Mathf.Approximately(playerRB.velocity.y, 0.0f))
             return true;
@@ -162,238 +166,5 @@ public class PlayerInputScript : MonoBehaviour
     public void Death()
     {
         currentState = new PlayerStateDeath(this);
-    }
-}
-/*
- * 
- * State Design Pattern
- * Every state implenents the IPlayerState interface, which 
- * */
-public interface IPlayerState
-{
-    void HandleInput();
-    void StateUpdate();
-    Color GetColor();
-}
-
-public class PlayerStateIdle : IPlayerState
-{
-    /*
-     * The player starts in idle, and does not move.
-     * */
-    PlayerInputScript pi;
-    Vector2 mi;
-    Vector2 ri;
-    float ji;
-    float cancelSpell;
-    float[] spellInputTable;
-    /*The constructor takes in the player input script because it needs 
-    * to be able to communicate with the player and accept data about the
-    * player, like input etc*/
-    public PlayerStateIdle(PlayerInputScript player)
-    {
-        pi = player;
-    }
-    //
-    /*If the player is in this state, they will always do whatever is in state update.
-     * Which includes accepting new input and */
-    public void StateUpdate()
-    {
-        pi.playerScript.Idle();
-        mi = pi.GetMovementInput();
-        ri = pi.GetRunInput();
-        ji = pi.GetJumpInput();
-        spellInputTable = pi.GetSpellInputTable();
-        cancelSpell = pi.GetCancelInput();
-    }
-    public void HandleInput()
-    {
-        if (mi.magnitude > 0f)
-            pi.currentState = new PlayerStateWalking(pi);
-        if (ji == 1f && pi.IsGrounded())
-            pi.currentState = new PlayerStateJumping(pi,false);
-        //check to see if a spell input was pressed
-        for (int i = 0; i<spellInputTable.Length;i++)
-        {
-            if (spellInputTable[i] == 1f && cancelSpell == 0f)
-            {
-                //Decide if the spell should be cast or is being aimed
-                pi.currentState = new PlayerStateAiming(pi, i);
-            }
-        }
-    }
-    //Debug gizmo
-    public Color GetColor()
-    {
-        return Color.red;
-    }
-}
-
-public class PlayerStateWalking : IPlayerState
-{
-    /*
-     * Purpose: To direct the player character in the direction that the player moves the left analog stick.
-     * Step by step:
-     * 
-     */
-    PlayerInputScript pi;
-    Vector2 mi;
-    Vector2 ri;
-    float[] spellInputTable;
-    float ji;
-    float cancelSpell;
-    public PlayerStateWalking(PlayerInputScript player)
-    {
-        pi = player;
-    }
-    public void StateUpdate()
-    {
-        mi = pi.GetMovementInput();
-        ri = pi.GetRunInput();
-        spellInputTable = pi.GetSpellInputTable();
-        ji = pi.GetJumpInput();
-        pi.playerScript.GroundMovement(mi.x, mi.y, mi.magnitude);
-        pi.playerScript.Run(ri.magnitude);
-        cancelSpell = pi.GetCancelInput();
-    }
-    public void HandleInput()
-    {
-        if (mi.magnitude == 0f)
-            pi.currentState = new PlayerStateIdle(pi);
-        //check to see if a spell input was pressed
-        for (int i = 0; i < spellInputTable.Length; i++)
-        {
-            if (spellInputTable[i] == 1f && cancelSpell == 0f)
-            {
-                //Decide if the spell should be cast, or is being aimed
-                pi.currentState = new PlayerStateAiming(pi, i);
-            }
-        }
-        if (ji == 1f && pi.IsGrounded())
-            pi.currentState = new PlayerStateJumping(pi,true);
-    }
-    public Color GetColor()
-    {
-        return Color.blue;
-    }
-}
-
-public class PlayerStateAiming : IPlayerState
-{
-    PlayerInputScript pi;
-    Vector2 mi;
-    float ci;
-    int spellNum;
-    float cancelSpell;
-    float[] spellInputTable;
-    public PlayerStateAiming(PlayerInputScript player, int sn)
-    {
-        pi = player;
-        spellNum = sn;
-        player.playerScript.StartAiming(sn);
-    }
-    public void StateUpdate()
-    {
-        mi = pi.GetMovementInput();
-        ci = pi.GetCancelInput();
-        //pass in the movement input vector so we know what direction to aim in
-        pi.playerScript.SpellAim(mi.x,mi.y);
-        spellInputTable = pi.GetSpellInputTable();
-        cancelSpell = pi.GetCancelInput();
-    }
-    public void HandleInput()
-    {
-        if (cancelSpell == 1f)
-        {
-            pi.currentState = new PlayerStateIdle(pi);
-        }
-        if (spellInputTable[spellNum] == 0f)
-        {
-            pi.currentState = new PlayerStateCasting(pi, spellNum);
-        }
-        if (ci > 0)
-        {
-            pi.currentState = new PlayerStateIdle(pi);
-            pi.playerScript.spellcastingScript.EndAiming();
-        }
-    }
-    public Color GetColor()
-    {
-        return Color.yellow;
-    }
-}
-
-public class PlayerStateCasting : IPlayerState
-{
-    PlayerInputScript pi;
-    int spellNumber;
-    public PlayerStateCasting(PlayerInputScript player, int sn)
-    {
-        pi = player;
-        spellNumber = sn;
-    }
-    public void StateUpdate()
-    {
-        pi.playerScript.CastSpell(spellNumber);
-    }
-    public void HandleInput()
-    {
-        pi.currentState = new PlayerStateIdle(pi);
-    }
-    public Color GetColor()
-    {
-        return Color.green;
-    }
-}
-
-public class PlayerStateJumping : IPlayerState
-{
-    Vector2 mi;
-    float jumpTimer = 0.0f;
-    float jumpTimeMax = 1.0f;
-    bool walking = false;
-    PlayerInputScript pi;
-    public PlayerStateJumping(PlayerInputScript player, bool w)
-    {
-        pi = player;
-        walking = w;
-    }
-    public void StateUpdate()
-    {
-        jumpTimer += Time.deltaTime;
-        mi = pi.GetMovementInput();
-        pi.playerScript.Jump(walking, jumpTimer, mi);
-    }
-    public void HandleInput()
-    {
-        if (jumpTimer >= jumpTimeMax)
-        {
-            pi.currentState = new PlayerStateIdle(pi);
-        }
-    }
-    public Color GetColor()
-    {
-        return Color.black;
-    }
-}
-
-
-public class PlayerStateDeath : IPlayerState
-{
-    PlayerInputScript pi;
-    public PlayerStateDeath(PlayerInputScript player)
-    {
-        pi = player;
-    }
-    public void StateUpdate()
-    {
-
-    }
-    public void HandleInput()
-    {
-    }
-    public Color GetColor()
-    {
-        return Color.magenta;
     }
 }

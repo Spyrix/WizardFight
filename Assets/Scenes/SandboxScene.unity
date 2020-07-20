@@ -10318,6 +10318,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3319039882370971357, guid: e405545376f68884782d977513131053,
+        type: 3}
+      propertyPath: maxZoom
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3319039882370971357, guid: e405545376f68884782d977513131053,
+        type: 3}
+      propertyPath: zoomLimit
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3319039882370971357, guid: e405545376f68884782d977513131053,
+        type: 3}
+      propertyPath: zoomOffSet
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e405545376f68884782d977513131053, type: 3}
 --- !u!33 &3370455020841865322

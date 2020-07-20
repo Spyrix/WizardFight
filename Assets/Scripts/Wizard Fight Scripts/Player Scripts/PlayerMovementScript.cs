@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * This script controls game logic for moving, rotating, and jumping the player.
+ */
+
 [RequireComponent(typeof(Transform))]
 public class PlayerMovementScript : MonoBehaviour
 {
@@ -24,12 +28,6 @@ public class PlayerMovementScript : MonoBehaviour
         playerRB = GetComponent<Rigidbody>();
         playerScript = GetComponent<PlayerScript>();
         movementSpeed = walkSpeed;
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        
     }
 
     internal void GroundMovement(float x, float y)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+//The instanstiation behavior of the electric spell object
 public class ElectricSpell : SpellObject
 {
     internal float damage = -10f;
