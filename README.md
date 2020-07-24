@@ -25,3 +25,7 @@ Showing off the ice spell, and how it freezes a character.
 Showing off victory, jumping, and looping back to the main menu.
 
 ![](PreviewGifs/6.gif)
+
+
+Models by: https://www.reddit.com/user/QuaterniusDev/
+Shaders by: https://thedevelopers.tech/ultimate_10_plus_shaders.html
