@@ -1,5 +1,5 @@
 # WizardFight
-This is a game that started with me wanting to learn Unity better, and is evolving into a first game. It lacks some polish, admittedly, but it's good for what it is. Play it here: https://spyrix.itch.io/wizard-fight
+This is a game that started with me wanting to learn the Unity game engine better, and evolved into a basic first game. It lacks some polish, but it's good for what it is. Play it here, you'll need two controllers connected locally to your computer: https://spyrix.itch.io/wizard-fight
 
 
 Showing the main menu and spell selection.
